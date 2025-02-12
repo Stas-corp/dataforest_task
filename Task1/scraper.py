@@ -104,7 +104,7 @@ def start_scraping() -> None:
         if response.status_code == 200:
             all_subcategory = soup.find('h2', class_='rt-Heading rt-r-size-4', string='Browse all categories').parent
             subcategory_links = all_subcategory.find_all("a", href=lambda x: x and f"/categories/{category}" in x)
-            for link in subcategory_links[:1]:
+            for link in subcategory_links:
                 print(link.get('href'))
                 thread = threading.Thread(target=scrape_subcategorys, args=(link.get('href'),), daemon=True)
                 thread.start()
